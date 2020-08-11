@@ -67,8 +67,13 @@ class Categories_BasketAbricot extends SeedObject
 			'position' => 30,),
 	);
 
-	public $code;
-	public $nom_terrain;
-	public $ville;
+	public $codecat;
+	public $libelle;
+	public $prixpardef;
 
+	public function getNomUrl($withpicto = 0, $option = '', $maxlength = 0)
+	{
+		$result = $this->libelle;
+		return $result;
+	}
 }

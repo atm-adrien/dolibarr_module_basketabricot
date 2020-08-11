@@ -70,5 +70,10 @@ class Terrain_BasketAbricot extends SeedObject
 	public $code;
 	public $nom_terrain;
 	public $ville;
-
+	
+	public function getNomUrl($withpicto = 0, $option = '', $maxlength = 0)
+	{
+		$result = $this->nom_terrain;
+		return $result;
+	}
 }
