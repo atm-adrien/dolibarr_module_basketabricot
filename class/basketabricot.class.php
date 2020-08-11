@@ -240,8 +240,10 @@ class basketAbricot extends SeedObject
      */
     public function delete(User &$user, $notrigger=false)
     {
+    	global $db;
         $this->deleteObjectLinked();
-
+		$sql = 'DELETE FROM '.MAIN_DB_PREFIX.'basketabricot WHERE rowid ='.$this->id;
+		$restarif = $db->query($sql);
         unset($this->fk_element); // avoid conflict with standard Dolibarr comportment
         return parent::delete($user);
     }

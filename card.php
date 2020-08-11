@@ -302,7 +302,7 @@ if ($action == 'create') {
 				// Modify
 				print '<div class="inline-block divButAction"><a class="butAction" href="' . $_SERVER["PHP_SELF"] . '?id=' . $object->id . '&amp;action=edit">' . $langs->trans("basketAbricotModify") . '</a></div>' . "\n";
 				// Clone
-				print '<div class="inline-block divButAction"><a class="butAction" href="' . $_SERVER["PHP_SELF"] . '?id=' . $object->id . '&amp;action=clone">' . $langs->trans("basketAbricotClone") . '</a></div>' . "\n";
+				print '<div class="inline-block divButAction"><a class="butAction" href="' . $_SERVER["PHP_SELF"] . '?id=' . $object->id . '&amp;action=confirm_clone">' . $langs->trans("basketAbricotClone") . '</a></div>' . "\n";
 
 				if (!empty($user->rights->basketabricot->basketabricot->delete)) {
 					print '<div class="inline-block divButAction"><a class="butActionDelete" href="' . $_SERVER["PHP_SELF"] . '?id=' . $object->id . '&amp;action=confirm_delete">' . $langs->trans("basketAbricotDelete") . '</a></div>' . "\n";
