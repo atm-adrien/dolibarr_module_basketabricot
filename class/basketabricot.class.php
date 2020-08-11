@@ -105,97 +105,90 @@ class basketAbricot extends SeedObject
             'comment' => 'Reference of object'
         ),
 
-        'entity' => array(
-            'type' => 'integer',
-            'label' => 'Entity',
+        'nom' => array(
+            'type' => 'varchar(50)',
+            'label' => 'Nom',
             'enabled' => 1,
-            'visible' => 0,
-            'default' => 1,
+            'visible' => 1,
             'notnull' => 1,
             'index' => 1,
             'position' => 20
         ),
 
-        'status' => array(
-            'type' => 'integer',
-            'label' => 'Status',
+        'fk_soc1' => array(
+            'type' => 'integer:Societe:societe/class/societe.class.php',
+            'label' => 'HomeTeam',
             'enabled' => 1,
-            'visible' => 0,
+            'visible' => 1,
             'notnull' => 1,
             'default' => 0,
             'index' => 1,
             'position' => 30,
-            'arrayofkeyval' => array(
-                0 => 'Draft',
-                1 => 'Active',
-                -1 => 'Canceled'
-            )
         ),
 
-        'label' => array(
-            'type' => 'varchar(255)',
-            'label' => 'Label',
+		'fk_soc2' => array(
+			'type' => 'integer:Societe:societe/class/societe.class.php',
+			'label' => 'OutTeam',
+			'enabled' => 1,
+			'visible' => 1,
+			'notnull' => 1,
+			'default' => 0,
+			'index' => 1,
+			'position' => 40,
+		),
+
+        'tarif' => array(
+            'type' => 'double',
+            'label' => 'Price',
             'enabled' => 1,
             'visible' => 1,
+			'index' => 1,
+			'isameasure' => 1,
             'position' => 40,
-            'searchall' => 1,
-            'css' => 'minwidth200',
-            'help' => 'Help text',
-            'showoncombobox' => 1
         ),
 
-        'fk_soc' => array(
-            'type' => 'integer:Societe:societe/class/societe.class.php',
-            'label' => 'ThirdParty',
+        'date' => array(
+            'type' => 'date',
+            'label' => 'Date',
             'visible' => 1,
             'enabled' => 1,
+			'notnull' => 1,
             'position' => 50,
             'index' => 1,
-            'help' => 'LinkToThirparty'
         ),
 
-        'description' => array(
-            'type' => 'text', // or html for WYSWYG
-            'label' => 'Description',
+        'terrain' => array(
+            'type' => 'integer',
+            'label' => 'BasketballCourt',
             'enabled' => 1,
-            'visible' => -1, //  un bug sur la version 9.0 de Dolibarr necessite de mettre -1 pour ne pas apparaitre sur les listes au lieu de la valeur 3
+            'visible' => 1,
+			'notnull' => 1,
+			'index' => 1,
             'position' => 60
         ),
 
-//        'fk_user_valid' =>array(
-//            'type' => 'integer',
-//            'label' => 'UserValidation',
-//            'enabled' => 1,
-//            'visible' => -1,
-//            'position' => 512
-//        ),
-
-        'import_key' => array(
-            'type' => 'varchar(14)',
-            'label' => 'ImportId',
+        'categ' => array(
+            'type' => 'integer',
+            'label' => 'Championship',
             'enabled' => 1,
-            'visible' => -2,
+            'visible' => 1,
             'notnull' => -1,
-            'index' => 0,
-            'position' => 1000
+            'index' => 1,
+            'position' => 70
         ),
 
     );
 
-    /** @var string $ref Object reference */
 	public $ref;
+	public $nom;
+	public $fk_soc1;
+	public $fk_soc2;
+	public $tarif;
+	public $date;
+	public $terrain;
+	public $categ;
 
-    /** @var int $entity Object entity */
-	public $entity;
 
-	/** @var int $status Object status */
-	public $status;
-
-    /** @var string $label Object label */
-    public $label;
-
-    /** @var string $description Object description */
-    public $description;
 
 
 

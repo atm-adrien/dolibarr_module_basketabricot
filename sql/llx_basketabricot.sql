@@ -1,4 +1,4 @@
-create table llx_basketabricot_match
+create table llx_basketabricot
 (
     rowid           integer AUTO_INCREMENT PRIMARY KEY,
     ref             varchar(128) NOT NULL UNIQUE,
@@ -8,7 +8,9 @@ create table llx_basketabricot_match
     tarif           decimal(7,2),
     date            datetime NOT NULL,
     terrain         varchar(255) NOT NULL,
-    categ           varchar(255)
+    categ           varchar(255),
+    date_creation   date,
+    tms             date
 );
 
 create table llx_c_categories_abricot

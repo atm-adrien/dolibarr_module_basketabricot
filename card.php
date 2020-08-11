@@ -18,17 +18,26 @@
 require 'config.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/functions.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.form.class.php';
+require_once 'lib/generic.lib.php';
 dol_include_once('basketabricot/class/basketabricot.class.php');
 dol_include_once('basketabricot/lib/basketabricot.lib.php');
 
 if(empty($user->rights->basketabricot->basketabricot->read)) accessforbidden();
 
-
+global $langs, $db;
 $langs->load('basketabricot@basketabricot');
 
 $action = GETPOST('action');
 $id = GETPOST('id', 'int');
-$ref = GETPOST('ref');
+
+$ref = GETPOST('Ref');
+$nom = GETPOST('Nom', 'alpha');
+$team1 = GETPOST('Team1', 'int');
+$team2 = GETPOST('Team2', 'int');
+$tarif = GETPOST('Tarif');
+$date = GETPOST('Date');
+$terrain = GETPOST('select_terrain', 'int');
+$categ = GETPOST('select_categ', 'int');
 
 $contextpage = GETPOST('contextpage', 'aZ') ? GETPOST('contextpage', 'aZ') : 'basketabricotcard';   // To manage different context of search
 $backtopage = GETPOST('backtopage', 'alpha');
@@ -205,7 +214,7 @@ if ($action == 'create')
     print '<table class="border centpercent">'."\n";
 
 // COMMON ATTRIBUTES
-
+	include DOL_DOCUMENT_ROOT . '/core/tpl/commonfields_add.tpl.php';
 
 // OTHER ATTRIBUTES
     include DOL_DOCUMENT_ROOT . '/core/tpl/extrafields_add.tpl.php';
