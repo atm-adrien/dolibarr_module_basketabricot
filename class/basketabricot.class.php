@@ -158,7 +158,7 @@ class basketAbricot extends SeedObject
         ),
 
         'terrain' => array(
-            'type' => 'integer',
+            'type' => 'integer:Terrain_BasketAbricot:basketabricot/class/terrain_basketabricot.class.php',
             'label' => 'BasketballCourt',
             'enabled' => 1,
             'visible' => 1,
@@ -168,7 +168,7 @@ class basketAbricot extends SeedObject
         ),
 
         'categ' => array(
-            'type' => 'integer',
+            'type' => 'integer:Categories_BasketAbricot:basketabricot/class/categorie_basketabricot.class.php',
             'label' => 'Championship',
             'enabled' => 1,
             'visible' => 1,

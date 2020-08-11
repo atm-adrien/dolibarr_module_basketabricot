@@ -140,26 +140,58 @@ class modbasketAbricot extends DolibarrModules
 		$this->tabs = array();
 
 		// Dictionaries
-		if (!isset($conf->basketabricot->enabled)) {
+		if (!isset($conf->basketabricot) || !isset($conf->basketabricot->enabled)) {
 			$conf->basketabricot = new stdClass();
 			$conf->basketabricot->enabled = 0;
 		}
-		$this->dictionaries = array();
-		/* Example:
-		if (! isset($conf->basketabricot->enabled)) $conf->basketabricot->enabled=0;	// This is to avoid warnings
-		$this->dictionaries=array(
-			'langs'=>'basketabricot@basketabricot',
-			'tabname'=>array(MAIN_DB_PREFIX."table1",MAIN_DB_PREFIX."table2",MAIN_DB_PREFIX."table3"),		// List of tables we want to see into dictonnary editor
-			'tablib'=>array("Table1","Table2","Table3"),													// Label of tables
-			'tabsql'=>array('SELECT f.rowid as rowid, f.code, f.label, f.active FROM '.MAIN_DB_PREFIX.'table1 as f','SELECT f.rowid as rowid, f.code, f.label, f.active FROM '.MAIN_DB_PREFIX.'table2 as f','SELECT f.rowid as rowid, f.code, f.label, f.active FROM '.MAIN_DB_PREFIX.'table3 as f'),	// Request to select fields
-			'tabsqlsort'=>array("label ASC","label ASC","label ASC"),																					// Sort order
-			'tabfield'=>array("code,label","code,label","code,label"),																					// List of fields (result of select to show dictionary)
-			'tabfieldvalue'=>array("code,label","code,label","code,label"),																				// List of fields (list of fields to edit a record)
-			'tabfieldinsert'=>array("code,label","code,label","code,label"),																			// List of fields (list of fields for insert)
-			'tabrowid'=>array("rowid","rowid","rowid"),																									// Name of columns with primary key (try to always name it 'rowid')
-			'tabcond'=>array($conf->basketabricot->enabled,$conf->basketabricot->enabled,$conf->basketabricot->enabled)												// Condition to show each dictionary
+		$this->dictionaries = array(
+			$langs->load("basketabricot@basketabricot"),
+			// List of tables we want to see into dictonnary editor
+			'tabname' => array(
+				MAIN_DB_PREFIX . "c_terrain_abricot",
+				MAIN_DB_PREFIX . "c_categories_abricot"
+			),
+			// Label of tables
+			'tablib' => array(
+				"DictionaryTerrainAbricot",
+				"DictionaryCategoriesAbricot"
+			),
+			// Request to select fields
+			'tabsql' => array(
+				'SELECT rowid, code, nom_terrain, ville, active FROM ' . MAIN_DB_PREFIX . 'c_terrain_abricot',
+				'SELECT rowid, codecat, libelle, prixpardef, active FROM ' . MAIN_DB_PREFIX . 'c_categories_abricot'
+			),
+			// Sort order
+			'tabsqlsort' => array(
+				"nom_terrain ASC",
+				"libelle ASC"
+			),
+			// List of fields (result of select to show dictionary)
+			'tabfield' => array(
+				'code,nom_terrain,ville',
+				'codecat,libelle,prixpardef'
+			),
+			// List of fields (list of fields to edit a record)
+			'tabfieldvalue' => array(
+				"code,nom_terrain,ville",
+				"codecat,libelle,prixpardef"
+			),
+			// List of fields (list of fields for insert)
+			'tabfieldinsert' => array(
+				"code,nom_terrain,ville",
+				"codecat,libelle,prixpardef"
+			),
+			// Name of columns with primary key (try to always name it 'rowid')
+			'tabrowid' => array(
+				"rowid",
+				"rowid"
+			),
+			// Condition to show each dictionary
+			'tabcond' => array(
+				$conf->basketabricot->enabled,
+				$conf->basketabricot->enabled
+			)
 		);
-		*/
 
 		// Boxes
 		// Add here list of php file(s) stored in core/boxes that contains class to show a box.

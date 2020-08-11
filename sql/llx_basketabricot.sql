@@ -25,7 +25,7 @@ create table llx_c_categories_abricot
 create table llx_c_terrain_abricot
 (
     rowid           integer AUTO_INCREMENT PRIMARY KEY,
-    code            varchar(3) NOT NULL,
+    code            varchar(5) NOT NULL,
     nom_terrain     varchar(255) NOT NULL,
     ville           varchar(255) NOT NULL,
     active          int NOT NULL
