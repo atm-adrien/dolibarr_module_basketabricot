@@ -35,12 +35,15 @@ basketAbricotStatusShortRefused=Refusée
 basketAbricotStatusShortAccepted=Acceptée
 
 # LIST
-basketAbricotList=Liste basketAbricot
+basketAbricotList=Liste des matchs
 NobasketAbricot=(vide)
+MatchList = Liste des Matchs
 
 # CARD
-NewbasketAbricot=Création basketAbricot
-basketAbricotCard=Fiche basketAbricot
+NewbasketAbricot=Nouveau Match
+basketAbricotCard=Fiche Match
+NewMatch = Nouveau Match
+
 
 basketAbricotModify=Modifier
 basketAbricotClone=Cloner
@@ -56,3 +59,8 @@ ConfirmValidatebasketAbricotBody=Souhaitez-vous vraiment activer cette fiche bas
 
 ConfirmDeletebasketAbricotTitle=Confirmation de suppression
 ConfirmDeletebasketAbricotBody=Souhaitez-vous vraiment supprimer cette fiche basketAbricot %s ?
+
+HomeTeam = Equipe Domicile
+OutTeam = Equipe extérieure
+BasketballCourt = Terrain
+Championship = Championnat
