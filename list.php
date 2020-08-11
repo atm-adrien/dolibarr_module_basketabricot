@@ -17,7 +17,7 @@
 
 require 'config.php';
 dol_include_once('basketabricot/class/basketabricot.class.php');
-
+global $db, $langs;
 
 if(empty($user->rights->basketabricot->basketabricot->read)) accessforbidden();
 
@@ -79,24 +79,23 @@ if (!empty($object->isextrafieldmanaged))
 	}
 }
 
-$sql = 'SELECT '.$fieldList;
+$sql = 'SELECT '.$fieldList.', s.nom as fk_nom1, s2.nom as fk_nom2, t2.nom_terrain, c.libelle';
 
 // Add fields from hooks
 $parameters=array('sql' => $sql);
 $reshook=$hookmanager->executeHooks('printFieldListSelect', $parameters, $object);    // Note that $action and $object may have been modified by hook
 $sql.=$hookmanager->resPrint;
 
-$sql.= ' FROM '.MAIN_DB_PREFIX.'basketabricot t ';
+$sql.= ' FROM '.MAIN_DB_PREFIX.'basketabricot as t';
 
-if (!empty($object->isextrafieldmanaged))
-{
-    $sql.= ' LEFT JOIN '.MAIN_DB_PREFIX.'basketabricot_extrafields et ON (et.fk_object = t.rowid)';
-}
+$sql .= ' JOIN llx_societe as s ON t.fk_soc1 = s.rowid';
+$sql .= ' JOIN llx_societe as s2 ON t.fk_soc2 = s2.rowid';
+$sql .= ' JOIN llx_c_terrain_abricot as t2 ON t.terrain = t2.rowid';
+$sql .= ' LEFT JOIN llx_c_categories_abricot as c ON t.categ = c.rowid';
 
 $sql.= ' WHERE 1=1';
 //$sql.= ' AND t.entity IN ('.getEntity('basketAbricot', 1).')';
 //if ($type == 'mine') $sql.= ' AND t.fk_user = '.$user->id;
-
 // Add where from hooks
 $parameters=array('sql' => $sql);
 $reshook=$hookmanager->executeHooks('printFieldListWhere', $parameters, $object);    // Note that $action and $object may have been modified by hook
@@ -134,11 +133,13 @@ $listViewConfig = array(
 		,'tms' => 'date'
 	)
 	,'search' => array(
-		'date_creation' => array('search_type' => 'calendars', 'allow_is_null' => true)
-		,'tms' => array('search_type' => 'calendars', 'allow_is_null' => false)
-		,'ref' => array('search_type' => true, 'table' => 't', 'field' => 'ref')
-		,'label' => array('search_type' => true, 'table' => array('t', 't'), 'field' => array('label')) // input text de recherche sur plusieurs champs
-		,'status' => array('search_type' => basketAbricot::$TStatus, 'to_translate' => true) // select html, la clé = le status de l'objet, 'to_translate' à true si nécessaire
+		'ref' => array('search_type' => true, 'table' => 't', 'field' => 'ref'),
+		'nom' => array('search_type' => true, 'table' => 't', 'field' => 'nom'),
+		'fk_nom1' => array('search_type' => true, 'table' => 's', 'field' => 'nom'),
+		'fk_nom2' => array('search_type' => true, 'table' => 's2', 'field' => 'nom'),
+		'date' => array('search_type' => 'calendar', 'table' => 't', 'field' => 'date'),
+		'nom_terrain' => array('search_type' => true, 'table' => 't2', 'field' => 'nom_terrain'),
+		'libelle' => array('search_type' => true),
 	)
 	,'translate' => array()
 	,'hide' => array(
@@ -146,9 +147,12 @@ $listViewConfig = array(
 	)
 	,'title'=>array(
 		'ref' => $langs->trans('Ref.')
-		,'label' => $langs->trans('Label')
-		,'date_creation' => $langs->trans('DateCre')
-		,'tms' => $langs->trans('DateMaj')
+		,'nom' => $langs->trans('Name')
+		,'fk_nom1' => $langs->trans('HomeTeam')
+		,'fk_nom2' => $langs->trans('OutTeam')
+		,'date' => $langs->trans('Date')
+		,'nom_terrain' => $langs->trans('BasketballCourt')
+		,'libelle' => $langs->trans('Championship')
 	)
 	,'eval'=>array(
 		'ref' => '_getObjectNomUrl(\'@rowid@\', \'@val@\')'

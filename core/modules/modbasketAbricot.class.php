@@ -258,7 +258,7 @@ class modbasketAbricot extends DolibarrModules
 		// Example to declare a new Top Menu entry and its Left menu entry:
 		$this->menu[$r] = array('fk_menu' => 0,        // Put 0 if this is a single top menu or keep fk_mainmenu to give an entry on left
 			'type' => 'top',                            // This is a Top menu entry
-			'titre' => 'BasketMatch',
+			'titre' => 'Match',
 			'mainmenu' => 'basketabricot',
 			'leftmenu' => 'basketabricot_left',            // This is the name of left menu for the next entries
 			'url' => '/basketabricot/list.php',
