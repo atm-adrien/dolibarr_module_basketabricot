@@ -30,12 +30,12 @@ $langs->load('basketabricot@basketabricot');
 $action = GETPOST('action');
 $id = GETPOST('id', 'int');
 
-$ref = GETPOST('Ref');
-$nom = GETPOST('Nom', 'alpha');
-$team1 = GETPOST('Team1', 'int');
-$team2 = GETPOST('Team2', 'int');
-$tarif = GETPOST('Tarif');
-$date = GETPOST('Date');
+$ref = GETPOST('ref');
+$nom = GETPOST('nom', 'alpha');
+$team1 = GETPOST('team1', 'int');
+$team2 = GETPOST('team2', 'int');
+$tarif = GETPOST('tarif');
+$date = GETPOST('date');
 $terrain = GETPOST('select_terrain', 'int');
 $categ = GETPOST('select_categ', 'int');
 
@@ -271,7 +271,7 @@ if ($action == 'create') {
 
 
 			$morehtmlstatus .= ''; //$object->getLibStatut(2); // pas besoin fait doublon
-			dol_banner_tab($object, 'id', $linkback, 1, 'rowid', 'ref', $morehtmlref, '', 0, '', $morehtmlstatus);
+			dol_banner_tab($object, 'ref', $linkback, 1, 'ref', 'ref', $morehtmlref, '', 0, '', $morehtmlstatus);
 
 			print '<div class="fichecenter">';
 

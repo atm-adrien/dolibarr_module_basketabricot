@@ -67,7 +67,7 @@ class basketAbricot extends SeedObject
     public $isextrafieldmanaged = 1;
 
     /** @var int $ismultientitymanaged 0=No test on entity, 1=Test with field entity, 2=Test with link by societe */
-    public $ismultientitymanaged = 1;
+    public $ismultientitymanaged = 0;
 
     /**
      *  'type' is the field format.
