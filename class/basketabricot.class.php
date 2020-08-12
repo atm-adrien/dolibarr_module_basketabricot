@@ -419,7 +419,7 @@ class basketAbricot extends SeedObject
      */
     public function getLibStatut($mode = 0)
     {
-        return self::LibStatut($this->status, $mode);
+        return 0;
     }
 
     /**

@@ -271,7 +271,7 @@ if ($action == 'create') {
 
 
 			$morehtmlstatus .= ''; //$object->getLibStatut(2); // pas besoin fait doublon
-			dol_banner_tab($object, 'ref', $linkback, 1, 'ref', 'ref', $morehtmlref, '', 0, '', $morehtmlstatus);
+			dol_banner_tab($object, 'id', $linkback, 1, 'rowid', 'ref', $morehtmlref, '', 0, '', $morehtmlstatus);
 
 			print '<div class="fichecenter">';
 
