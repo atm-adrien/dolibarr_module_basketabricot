@@ -28,6 +28,10 @@ $langs->load('basketabricot@basketabricot');
 $massaction = GETPOST('massaction', 'alpha');
 $confirmmassaction = GETPOST('confirmmassaction', 'alpha');
 $toselect = GETPOST('toselect', 'array');
+$search_fk_nom1 = GETPOST('search_fk_soc1', 'int');
+$search_fk_nom2 = GETPOST('search_fk_nom2', 'int');
+$search_nom_terrain = GETPOST('search_terrain', 'int');
+$search_libelle = GETPOST('search_categ', 'int');
 
 $object = new basketAbricot($db);
 
@@ -122,7 +126,7 @@ $listViewConfig = array(
 		,'messageNothing' => $langs->trans('NobasketAbricot')
 		,'picto_search' => img_picto('', 'search.png', '', 0)
 		,'massactions'=>array(
-			'yourmassactioncode'  => $langs->trans('YourMassActionLabel')
+			'yourmassactioncode'  => $langs->trans('Delete')
 		)
 		,'selected' => $toselect
 	)
@@ -135,11 +139,11 @@ $listViewConfig = array(
 	,'search' => array(
 		'ref' => array('search_type' => true, 'table' => 't', 'field' => 'ref'),
 		'nom' => array('search_type' => true, 'table' => 't', 'field' => 'nom'),
-		'fk_nom1' => array('search_type' => true, 'table' => 's', 'field' => 'nom'),
-		'fk_nom2' => array('search_type' => true, 'table' => 's2', 'field' => 'nom'),
+		'fk_nom1' => array('search_type' => 'override',  'override' => $object->showInputField('','fk_soc1',$search_fk_nom1, '','', 'search_'), 'fieldname' => 'search_fk_soc1', 'table'=>'t', 'field'=>'fk_soc1'),
+		'fk_nom2' => array('search_type' => 'override',  'override' => $object->showInputField('','fk_soc2',$search_fk_nom2, '','', 'search_'), 'fieldname' => 'search_fk_soc2', 'table'=>'t', 'field'=>'fk_soc2'),
 		'date' => array('search_type' => 'calendar', 'table' => 't', 'field' => 'date'),
-		'nom_terrain' => array('search_type' => true, 'table' => 't2', 'field' => 'nom_terrain'),
-		'libelle' => array('search_type' => true),
+		'nom_terrain' => array('search_type' => 'override',  'override' => $object->showInputField('','terrain',$search_nom_terrain, '','', 'search_'), 'fieldname' => 'search_terrain', 'table'=>'t', 'field'=>'terrain'),
+		'libelle' => array('search_type' => 'override',  'override' => $object->showInputField('','categ',$search_libelle, '','', 'search_'), 'fieldname' => 'search_categ', 'table'=>'t', 'field'=>'categ'),
 	)
 	,'translate' => array()
 	,'hide' => array(
@@ -161,6 +165,16 @@ $listViewConfig = array(
 );
 
 $r = new Listview($db, 'basketabricot');
+
+//MassAction
+if ($confirmmassaction == 'Confirmer')
+{
+	foreach ($toselect as $cbcheck){
+		$sqldelete = 'DELETE FROM '.MAIN_DB_PREFIX.'basketabricot WHERE rowid ='.$cbcheck;
+		$resdelete = $db->query($sqldelete);
+	}
+}
+
 
 // Change view from hooks
 $parameters=array(  'listViewConfig' => $listViewConfig);
