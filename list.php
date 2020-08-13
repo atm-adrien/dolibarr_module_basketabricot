@@ -109,6 +109,9 @@ $formcore = new TFormCore($_SERVER['PHP_SELF'], 'form_list_basketabricot', 'GET'
 
 $nbLine = GETPOST('limit');
 if (empty($nbLine)) $nbLine = !empty($user->conf->MAIN_SIZE_LISTE_LIMIT) ? $user->conf->MAIN_SIZE_LISTE_LIMIT : $conf->global->MAIN_SIZE_LISTE_LIMIT;
+// Selection of new fields
+include DOL_DOCUMENT_ROOT.'/core/actions_changeselectedfields.inc.php';
+print '<input type="hidden" name="formfilteraction" id="formfilteraction" value="list">';
 
 // List configuration
 $listViewConfig = array(
